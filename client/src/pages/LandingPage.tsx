@@ -1,43 +1,48 @@
-import { Button } from "@/components/ui/button";
+import React, { useState } from "react";
+
+// Components
+import { Header } from "@/components/Header";
 import { LandingHero } from "@/components/LandingHero";
+import HowItWorks from "@/components/HowItWorks";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { Link } from "wouter";
+
+// UI Elements
+import { Button } from "@/components/ui/button";
 
 export default function LandingPage() {
+  const [loading, setLoading] = useState(false);
+
+  const handleGetStarted = () => {
+    setLoading(true);
+    console.log("Get Started clicked"); // Replace with your action
+  };
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="flex h-14 items-center justify-between px-6 lg:px-8">
-          <div className="flex items-center space-x-2">
-            <h1 className="text-xl font-bold text-primary" data-testid="text-logo">
-              MediRemind
-            </h1>
-          </div>
-          <div className="flex items-center space-x-4">
-            <ThemeToggle />
-            <Link href="/dashboard">
-              <Button data-testid="button-enter-app">Enter App</Button>
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Header />
 
-      {/* Main Content */}
-      <main>
-        <LandingHero />
-      </main>
+      {/* Theme Toggle */}
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
 
-      {/* Footer */}
-      <footer className="border-t py-12">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="text-center">
-            <p className="text-sm text-muted-foreground">
-              © 2024 MediRemind. Professional medicine management for everyone.
-            </p>
-          </div>
-        </div>
-      </footer>
+      {/* Hero Section */}
+      <LandingHero />
+
+      {/* How It Works Section */}
+      <HowItWorks />
+
+      {/* Call to Action */}
+      <div className="text-center my-12">
+        <Button
+          size="lg"
+          onClick={handleGetStarted}
+          className="bg-primary hover:bg-primary/90 px-8 h-14 text-lg font-medium"
+        >
+          Get Started
+        </Button>
+      </div>
     </div>
   );
 }
